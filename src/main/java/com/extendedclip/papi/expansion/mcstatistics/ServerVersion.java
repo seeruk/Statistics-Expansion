@@ -15,10 +15,10 @@ import java.util.regex.Pattern;
  */
 public final class ServerVersion {
 
+    public static final String AS_STRING = Bukkit.getBukkitVersion().split("-")[0];
+
     private static final int CURRENT_VERSION = getCurrentVersion();
     private static final int LATEST_VERSION = 1_19_2;
-
-    public static final String AS_STRING = Bukkit.getBukkitVersion().split("-")[0];
 
     public static final boolean IS_LEGACY = CURRENT_VERSION < 1_13_0;
     /**
@@ -31,7 +31,8 @@ public final class ServerVersion {
 
     private static int getCurrentVersion() {
         // No need to cache since will only run once
-        final Matcher matcher = Pattern.compile("(?<version>\\d+\\.\\d+)(?<patch>\\.\\d+)?").matcher(AS_STRING);
+        final Matcher matcher = Pattern.compile("^(?<version>\\d+\\.\\d+)(?<patch>\\.\\d+)?")
+            .matcher(AS_STRING);
 
         final StringBuilder stringBuilder = new StringBuilder();
         if (matcher.find()) {
@@ -49,5 +50,4 @@ public final class ServerVersion {
 
         return version;
     }
-
 }

@@ -18,4 +18,4 @@ build
 out
 
 ### Maven ###
-target/*
+target
